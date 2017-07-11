@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                <p:panel id="sendCodePanel" class="three-quarters account-view--right" header="Send Ephemeral Code" >
+                    <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+                    <h:form id="sendCodeForm">  
+                        <f:event listener="#{ephemeralCodeBean.validateRecipientFields}" type="postValidate" />
+                        <p:panelGrid columns="2">
+                            <h:outputLabel value="Doorbox ID" style="font-weight:bold;"/>
+                            <h:outputLabel value="#{ephemeralCodeBean.doorboxId}" style="font-weight:bold;"/>
+                            
+                            <h:outputLabel for="recipientName" value="Recipient Name" style="font-weight:bold;"/>
+                            <p:inputText id="recipientName" value="#{ephemeralCodeBean.recipientName}" label="Recipient Name">
+                                <f:ajax render="recipientName" event="keyup"/>
+                            </p:inputText>
+
+                            <h:outputLabel for="recipientEmail" value="Recipient Email" style="font-weight:bold" />
+                            <p:inputText id="recipientEmail" value="#{ephemeralCodeBean.recipientEmail}" label="Recipient Email" required="#{empty ephemeralCodeBean.recipientEmail and empty ephemeralCodeBean.recipientPhone}">
+                                <f:validateRegex disabled="#{empty ephemeralCodeBean.recipientEmail}" for="recipientEmail" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                <f:ajax render="messages" event="blur"/>
+                            </p:inputText>
+
+                            <h:outputLabel for="recipientPhone" value="Recipient SMS Phone" style="font-weight:bold" />
+                            <p:inputMask id="recipientPhone" value="#{ephemeralCodeBean.recipientPhone}" label="Recipient SMS Phone" mask="(999) 999-9999" required="#{empty ephemeralCodeBean.recipientEmail and empty ephemeralCodeBean.recipientPhone}">
+                                <f:validateRegex disabled="#{empty ephemeralCodeBean.recipientPhone}" for="recipientPhone" pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$" />
+                                <f:ajax render="messages" event="keyup"/>
+                            </p:inputMask>
+
+                            <h:outputLabel for="message" value="Message" style="font-weight:bold" />
+                            <p:inputTextarea id="message" value="#{ephemeralCodeBean.message}" label="Message" rows="4" style="width: 375px;">
+                                <f:ajax render="messages" event="keyup"/>
+                            </p:inputTextarea>
+
+                            <p:outputLabel for="startDatetime" value="Starting Date and Time" />
+                            <p:calendar id="startDatetime" value="#{ephemeralCodeBean.startDate}" pattern="yyyy-MM-dd HH:mm a" />
+
+                            <p:outputLabel for="endDatetime" value="Ending Date and Time" />
+                            <p:calendar id="endDatetime" value="#{ephemeralCodeBean.endDate}" pattern="yyyy-MM-dd HH:mm a" />
+
+                            
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="Send Code" action="#{ephemeralCodeBean.sendCode}" validateClient="true" ajax="false" icon="ui-icon-check"/>
+                            <p:commandButton value="Cancel" action="myDoorboxes" immediate="true" icon="ui-icon-cancel"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:panel>          
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

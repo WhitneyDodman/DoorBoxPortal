@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="Shop - Our selection of DoorBoxes"/>
+            <ui:param name="metaDescription" value="Shop our selection of DoorBoxes"/>
+            <ui:param name="metaKeywords" value="doorbox subscription"/>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <!-- templates/collection.liquid -->
+                    <div class="grid--full collection-list">
+                        <div class="collection-list__header grid-item medium--three-quarters push--medium--one-eighth large--three-quarters push--large--one-eighth" style="display: none">
+                            <header class="section-header">
+                                <!-- <h1 class="section-header- -title">Boxes</h1> -->
+                                <div class="rte rte--header">
+                                    .
+                                </div>
+                            </header>
+                        </div>
+                        <h2 class="index-message" align="center">Click on a DoorBox for More Detailed Information</h2>
+
+                        <h2 align="center">Greater Toronto Area Promotional Offer!</h2>
+                        <div class="grid-item medium--three-quarters push--medium--one-eighth large--three-quarters push--large--one-eighth text-center">
+                            <!-- snippets/product-grid-item.liquid -->
+                            <div class="product-item fluid-grid-item text-center">
+                                <div class="grid-image" style="height: 136px; width:250px;">
+                                    <a href="/shop_largeDoorBox.xhtml" class="grid-image--centered">
+                                        <img height="177" width="177" src="./images/doorbox-large.jpg" alt="Large DoorBox"/>
+                                    </a>
+                                </div>
+
+                                <p class="product-item__name">
+                                    <a href="/shop_largeDoorBox.xhtml">Large DoorBox</a>
+                                </p>
+                                <p class="product-item__price">
+                                    <span class="product-item__price">
+                                        <h2><sup>$</sup>14.99/month*<br/></h2>
+                                    </span>
+                                </p>
+                            </div>
+                            
+                            <!-- snippets/product-grid-item.liquid -->
+                            <div class="product-item fluid-grid-item text-center">
+                                <div class="grid-image" style="height: 136px; width:250px;">
+                                    <a href="/shop_mediumDoorBox.xhtml" class="grid-image--centered">
+                                        <img height="177" width="177" src="./images/doorbox-medium.png" alt="Medium DoorBox"/>
+                                    </a>
+                                </div>
+
+                                <p class="product-item__name">
+                                    <a href="/shop_mediumDoorBox.xhtml">Medium DoorBox</a>
+                                </p>
+                                <p class="product-item__price">
+                                    <span class="product-item__price">
+                                        <h2><sup>$</sup>8.99/month*<br/></h2>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <!-- snippets/product-grid-item.liquid -->
+                            <div class="product-item fluid-grid-item text-center">
+                                <div class="grid-image" style="height: 136px; width:250px;">
+                                    <a href="/shop_smallDoorBox.xhtml" class="grid-image--centered">
+                                        <img height="177" width="177" src="./images/doorbox-small.jpg" alt="Small DoorBox"/>
+                                    </a>
+                                </div>
+
+                                <p class="product-item__name">
+                                    <a href="/shop_smallDoorBox.xhtml">Small DoorBox</a>
+                                </p>
+                                <p class="product-item__price">
+                                    <span class="product-item__price">
+                                        <h2><sup>$</sup>7.99/month*<br/></h2>
+                                    </span>
+                                </p>
+                            </div>
+                            <p align="center" style="font-size: 18px;">* Plus $39.99 for delivery &amp; installation by a Friendly DoorBox Installer</p>
+                            <p align="center"><em>(Subsidized delivery &amp; installation promotional offer available for a limited time only to residents of the GTA)</em></p>
+                        </div>
+                    </div>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

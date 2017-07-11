@@ -1,0 +1,21 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 15, 2016, 3:55:27 PM
+    Author     : torinw
+*/
+
+body {
+    overflow:hidden; 
+    background: #FFFFFF;
+    margin:0;
+    padding:0;
+}
+#doorbox {
+    width: 320px;
+    height: 460px;
+    background:#FFFFFF;
+}

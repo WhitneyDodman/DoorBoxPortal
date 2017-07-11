@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                <h:form id="form">
+                    <p:panel id="panel" class="three-quarters account-view--right" header="My Doorboxes" >
+                        <p:messages id="doorboxesListFormMessages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+                        <p:dataTable id="singleDT" var="doorbox" value="#{myDoorboxesBean.doorboxes}" selectionMode="single" selection="#{myDoorboxesBean.selectedDoorbox}" rowKey="#{doorbox.doorboxId}">
+                            <p:ajax event="rowSelect" update="viewButton addButton copyButton updateButton deleteButton"/>
+                            <p:ajax event="rowUnselect" update="viewButton addButton copyButton updateButton deleteButton"/>
+
+                            <p:column headerText="Id">
+                                <h:outputText value="#{doorbox.doorboxId}" />
+                            </p:column>
+                            <p:column headerText="Unique ID">
+                                <h:outputText value="#{doorbox.uniqueId}" />
+                            </p:column>
+                            <p:column headerText="Location">
+                                <h:outputText value="#{doorbox.locationDescription}" />
+                            </p:column>
+                            <p:column headerText="Latitude">
+                                <h:outputText value="#{doorbox.latitude}" />
+                            </p:column>
+                            <p:column headerText="Longitude">
+                                <h:outputText value="#{doorbox.longitude}" />
+                            </p:column>
+
+                            <f:facet name="footer">
+                                <p:commandButton id="viewButton" action="myDoorbox_view" value="View" disabled="#{empty myDoorboxesBean.selectedDoorbox}">
+                                    <f:param name="doorboxId" value="#{myDoorboxesBean.selectedDoorbox.doorboxId}" />
+                                </p:commandButton>
+                                <p:commandButton id="addButton" action="myDoorbox_add" value="Add"/>
+                                <p:commandButton id="copyButton" action="myDoorbox_copy" value="Copy" disabled="#{empty myDoorboxesBean.selectedDoorbox}">
+                                    <f:param name="doorboxId" value="#{myDoorboxesBean.selectedDoorbox.doorboxId}" />
+                                </p:commandButton>
+                                <p:commandButton id="updateButton" action="myDoorbox_update" value="Update" disabled="#{empty myDoorboxesBean.selectedDoorbox}">
+                                    <f:param name="doorboxId" value="#{myDoorboxesBean.selectedDoorbox.doorboxId}" />
+                                </p:commandButton>
+                                <p:commandButton id="deleteButton" action="myDoorbox_delete" value="Delete" disabled="#{empty myDoorboxesBean.selectedDoorbox}">
+                                    <f:param name="doorboxId" value="#{myDoorboxesBean.selectedDoorbox.doorboxId}" />
+                                </p:commandButton>
+                                <!--p:commandButton id="sendButton" action="myDoorbox_sendCode" value="Send Code" disabled="# {empty myDoorboxesBean.selectedDoorbox}">
+                                    <f:param name="doorboxId" value="# {myDoorboxesBean.selectedDoorbox.doorboxId}" />
+                                </p:commandButton-->
+                            </f:facet>
+                        </p:dataTable>                        
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

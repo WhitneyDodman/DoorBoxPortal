@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+       <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                <h:form id="userRegForm">                        
+                    <p:panel id="panel" class="three-quarters account-view--right" header="Account Overview" >
+                        <p:panelGrid columns="2" styleClass="label, value" style="margin-top: 10px;">
+
+                            <p:outputLabel value="Account ID" style="font-weight:bold" />
+                            <p:outputLabel value="#{myAccountBean.accountId}"/>
+
+                            <p:outputLabel value="Email" style="font-weight:bold" />
+                            <p:outputLabel value="#{myAccountBean.email}"/>
+
+                            <p:outputLabel value="Doorboxes Managed" style="font-weight:bold" />
+                            <p:outputLabel value="#{myDoorboxesBean.doorboxes.size()}"/>
+
+                        </p:panelGrid>
+                        
+                        <p:dataTable var="log" value="#{logBean.lastLogs(5)}" rows="5" style="margin-top: 10px;">
+                            <f:facet name="header">Recent Events</f:facet>
+                            <p:column headerText="Timestamp">
+                                <h:outputText value="#{log.timestamp}">
+                                    <f:convertDateTime timeZone="EDT" pattern="yyyy-MM-dd HH:mm:ss z" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Event">
+                                <h:outputText value="#{log.event}" />
+                            </p:column>
+
+                            <p:column headerText="Parameters">
+                                <h:outputText value="#{log.params}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

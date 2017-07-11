@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="mainTabIndex" value="tab0"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="scripts">
+                <script src="https://www.google.com/recaptcha/api.js"></script>
+            </ui:define>
+            <ui:define name="content">
+                <f:metadata>
+                    <f:viewParam name="hosted_button_id" value="#{newSubscriberBean.hostedButtonId}"/>
+                    <f:viewParam name="button_image" value="#{newSubscriberBean.buttonImage}"/>
+                    <f:viewAction action="#{newSubscriberBean.init()}" />
+                </f:metadata>
+                <main class="wrapper main-content" role="main">
+                    <h:form id="userRegForm">
+                        <p:panel id="panel" header="New Subscription Registration">
+                            <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+
+                            <h3>STEP 1: Billing Address</h3>
+                            <p style="margin: 0px 0px -2px 0px;">- Your email address will serve as your DoorBox account login.</p>
+                            <p style="margin: -2px 0px -2px 0px;">- Please create a unique password different from all other websites.</p>
+                            <p style="margin: -2px 0px 15px 0px;">- The (billing) address entered here will also be passed to our payment card gateway.</p>
+                            <!--
+                            <p>You are subscribing to the DoorBox service for <strong>$8.99 per month</strong> plus a <strong>one-time payment of $39.99</strong>.</p>
+                            <p>Your first payment therefore will be $48.98 plus HST but each month thereafter will be just the DoorBox service at $8.99 plus HST.</p>
+                            <p style="margin-bottom: 20px;">Please fill out your shipping address where your DoorBox will be delivered and installed.</p>
+                            <p style="margin-bottom: 20px;">Payment details will be entered next on our secure card payment processor, <strong><em>PayPal</em></strong>.</p>
+                            <p><em>Note: A PayPal account will be required to manage your subscription.</em></p>
+                            -->
+                            
+                            <p:panelGrid>
+
+                                <p:row>                                    
+                                    <p:column>
+                                        <h:outputLabel for="email" value="Email"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText id="email" value="#{newSubscriberBean.email}" label="Email" required="true" size="32" validator="#{newSubscriberBean.validateEmail}">
+                                            <f:ajax render="emailMsg" event="blur"/>
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column><i>username@domain.com (max length: 64)</i></p:column>
+                                </p:row>
+
+                                
+                                <p:row>
+                                    <p:column>
+                                        <h:outputLabel for="password1" value="Enter Password" />
+                                    </p:column>
+                                    <p:column>
+                                        <p:password id="password1" value="#{newSubscriberBean.password1}" label="Password" required="true" feedback="true" size="20" redisplay="true">
+                                            <f:ajax render="password1Msg" event="blur" />
+                                        </p:password>
+                                    </p:column>
+                                    <p:column rowspan="2" style="padding-bottom: 18px;"><span style="color: #999999; font-size:+2.5em; font-weight: lighter; vertical-align: middle;">]</span><span style="font-style: italic; padding-left: 15px; vertical-align: middle;">Passwords must match</span></p:column>
+                                </p:row>
+
+                                <p:row>
+                                    <p:column>
+                                        <h:outputLabel for="password2" value="Confirm Password"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:password id="password2" value="#{newSubscriberBean.password2}" label="Confirm Password" required="true" feedback="true" size="20" redisplay="true" validator="#{newSubscriberBean.validatePasswords}">
+                                            <f:ajax render="password2Msg" event="blur"/>
+                                        </p:password>
+                                    </p:column>
+                                </p:row>
+                                
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="company" value="Company"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText id="company" value="#{newSubscriberBean.company}" label="Company" required="false" size="32">
+                                            <f:ajax render="companyMsg" event="blur"/>
+                                        </p:inputText>
+                                    </p:column>                                    
+                                </p:row>
+
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="firstname" value="First Name"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText id="firstname" value="#{newSubscriberBean.firstname}" label="First Name" required="true" size="32">
+                                            <f:ajax render="firstnameMsg" event="blur"/>
+                                        </p:inputText>
+                                    </p:column>                                    
+                                </p:row>
+
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="lastname" value="Last Name"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:inputText id="lastname" value="#{newSubscriberBean.lastname}" label="Last Name" required="true" size="32">
+                                            <f:ajax event="blur" render="lastnameMsg"/>
+                                        </p:inputText>
+                                    </p:column>
+                                </p:row>
+
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="address1" value="Address 1"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:inputText id="address1" value="#{newSubscriberBean.address1}" label="Address 1" required="true" size="48">
+                                            <f:ajax render="msgAddress1" event="blur" />
+                                         </p:inputText>
+                                    </p:column>
+                                </p:row>
+
+                                 <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="address2" value="Address 2"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:inputText id="address2" value="#{newSubscriberBean.address2}" label="Address 2" required="false" size="48">
+                                            <f:ajax render="msgAddress2" event="blur" />
+                                        </p:inputText>
+                                    </p:column>
+                                </p:row>
+
+                                 <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="city" value="City"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:inputText id="city" value="#{newSubscriberBean.city}" label="City" required="true" size="32">
+                                            <f:ajax render="msgCity" event="blur" />
+                                        </p:inputText>
+                                    </p:column>
+                                </p:row>
+                                
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="stateprov" value="State/Province"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:selectOneMenu id="stateprov" value="#{newSubscriberBean.stateprov}" style="width:200px;" required="true">
+                                            <f:selectItem itemLabel="Select State/Province" itemValue="" noSelectionOption="true" />
+                                            <f:selectItems value="#{newSubscriberBean.stateprovs}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+
+                                 <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="country" value="Country" />
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:selectOneMenu id="country" value="#{newSubscriberBean.country}" style="width:200px;" required="true">
+                                            <!--p:ajax listener="# {newSubscriberBean.onCountryChange}" update="stateprov" /-->
+                                            <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
+                                            <f:selectItems value="#{newSubscriberBean.countries}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+
+                                 <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="postalcode" value="Postal/Zip Code"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText id="postalcode" value="#{newSubscriberBean.postalcode}" label="Postal/Zip Code" required="true" size="15">
+                                            <f:ajax render="postalcode" event="blur" />
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column>
+                                        <span style="font-size-adjust: 0.5; line-height: 0.5;">
+                                            <p><i>Canada: A1A 2B2</i></p>
+                                            <p><i>USA: nnnnn or nnnnn-nnnnn</i></p>
+                                        </span>
+                                    </p:column>
+                                </p:row>
+
+                                 <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="phone1" value="Phone 1"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputMask id="phone1" value="#{newSubscriberBean.phone1}" label="Phone 1" required="true" mask="(999) 999-9999" size="15">
+                                            <f:ajax render="phone1" event="blur" />
+                                        </p:inputMask>
+                                    </p:column>
+                                    <p:column>
+                                        <i>(nnn) nnn-nnnn</i>
+                                    </p:column>
+                                </p:row>
+
+                                 <p:row>
+                                    <p:column>
+                                        <p:outputLabel for="phone2" value="Phone 2"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputMask id="phone2" value="#{newSubscriberBean.phone2}" label="Phone 2" mask="(999) 999-9999" size="15">
+                                            <f:ajax render="phone2" event="blur" />
+                                        </p:inputMask>
+                                    </p:column>
+                                    <p:column>
+                                        <i>(nnn) nnn-nnnn</i>
+                                    </p:column>
+                                </p:row>
+                                        
+                                <p:row>
+                                    <p:column colspan="3" style="padding-top: 35px;">
+                                        <p:commandButton value="Continue" action="#{newSubscriberBean.saveAndContinue}" validateClient="true" ajax="false" icon="ui-icon-check"/>
+                                        <p:commandButton value="Cancel" action="/shop.xhtml" immediate="true" icon="ui-icon-cancel"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:panel>                        
+                    </h:form>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

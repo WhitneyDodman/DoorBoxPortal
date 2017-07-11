@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                <p:panel id="sendCodePanel" class="three-quarters account-view--right" header="Send DoorBox Code" >
+                    <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+                    <h:form id="sendCodeForm">  
+                        <f:event listener="#{ephemeralCodeBean.validateFields}" type="postValidate" />
+                        <p style="margin: 10px 10px 10px 10px;">
+                           Send a temporary DoorBox code that activates and deactivates on the chosen dates.
+                           Deliver codes via email <i>and/or</i> SMS. We suggest providing instructions to your recipient in the <i>Message</i> field.
+                           Once issued, codes cannot be canceled, so keep the window to the minimum necessary.
+                        </p>
+                        <p:panelGrid columns="2">
+                            <h:outputLabel value="Doorbox ID" style="font-weight:bold;"/>
+                            <p:selectOneMenu id="doorboxId" value="#{ephemeralCodeBean.doorboxId}" style="width:300px">
+                                <f:selectItems value="#{myDoorboxesBean.doorboxes}" var="doorbox" itemLabel="#{doorbox.uniqueId}" itemValue="#{doorbox.doorboxId}"/>
+                            </p:selectOneMenu>
+                            
+                            <h:outputLabel value="Recipient Name" style="font-weight:bold;"/>
+                            <p:inputText id="recipientName" value="#{ephemeralCodeBean.recipientName}" label="Recipient Name">
+                                <f:ajax render="messages" event="keyup"/>
+                            </p:inputText>
+
+                            <h:outputLabel value="Recipient Email" style="font-weight:bold" />
+                            <p:inputText id="recipientEmail" value="#{ephemeralCodeBean.recipientEmail}" label="Recipient Email" validatorMessage="Format: username@domain.com">
+                                <f:validateRegex disabled="#{empty ephemeralCodeBean.recipientEmail}" for="recipientEmail" pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                <f:ajax render="messages" event="keyup"/>
+                            </p:inputText>
+
+                            <h:outputLabel value="Recipient SMS Phone" style="font-weight:bold" />
+                            <p:inputText id="recipientPhone" value="#{ephemeralCodeBean.recipientPhone}" label="Recipient SMS Phone" validatorMessage="Format: (nnn) nnn-nnnn">
+                                <f:validateRegex disabled="#{empty ephemeralCodeBean.recipientPhone}" for="recipientPhone" pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$" />
+                                <f:ajax render="messages" event="keyup"/>
+                            </p:inputText>
+
+                            <h:outputLabel value="Message" style="font-weight:bold" />
+                            <p:inputTextarea id="message" value="#{ephemeralCodeBean.message}" label="Message" rows="4" style="width: 375px;" required="false">
+                                <f:ajax render="messages" event="keyup"/>
+                            </p:inputTextarea>
+
+                            <p:outputLabel value="Starting Date and Time" />
+                            <p:calendar id="startDatetime" value="#{ephemeralCodeBean.startDate}" pattern="yyyy-MM-dd HH:mm a" mindate="#{ephemeralCodeBean.currentDate}">
+                                <f:ajax render="messages" event="keyup"/>
+                            </p:calendar>
+
+                            <p:outputLabel value="Duration" />
+                            <p:selectOneMenu id="duration" value="#{ephemeralCodeBean.durationId}" style="width:300px">
+                                <f:selectItem itemLabel="Select Duration" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{ephemeralCodeBean.durations}" />
+                            </p:selectOneMenu>
+
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="Send Code" action="#{ephemeralCodeBean.sendTempCode}" validateClient="true" ajax="false" icon="ui-icon-check" update="messages"/>
+                            <p:commandButton value="Cancel" action="myAccountOverview" immediate="true" icon="ui-icon-cancel"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:panel>          
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

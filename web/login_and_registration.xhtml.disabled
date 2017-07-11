@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <table align="center" width="100%" border="0" style="table-border: none;">
+                        <tr>
+                            <td width="45%">
+                                <img align="center" src="images/TheDoorBox.png" />
+                            </td>
+                            <td width="55%">
+                                <h2>Doorbox Management Portal</h2>
+
+                                <h:form id="loginForm" >
+                                    <table width="100%" style="table-border: none;">
+                                        <tr>
+                                            <td valign="top" colspan="2" align="left">
+                                                <div class="hintText" style="margin-right: 20px;">Existing users sign in here:</div>
+                                            </td>
+                                            <td valign="top" colspan="1" align="left">
+                                                <p:messages id="messages" showSummary="false" showDetail="true" autoUpdate="true" closable="true" />
+                                            </td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td align="left">
+                                                <p:outputLabel for="emailField" value="Email"/>
+                                            </td>
+                                            <td colspan="2" align="left">
+                                                <p:inputText id="emailField" maxlength="25" size="20" value="#{authBean.email}"/>
+                                            </td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td align="left">
+                                                <p:outputLabel for="passwordField" value="Password"/>
+                                            </td>
+                                            <td colspan="2" align="left">
+                                                <p:password id="passwordField" maxlength="25" size="20" value="#{authBean.password}" />
+                                            </td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td colspan="1" align="left">
+                                                <p:commandButton action="#{authBean.login_action}" style="width: 150px; margin: 20px 0px 20px 0px;" value="Log In"/>
+                                            </td>
+                                            <td colspan="2" align="right">
+                                                <h:link value="Forgot your password?" outcome="forgotPassword.xhtml"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                --- OR ---
+                                            </td>
+                                        </tr>                                    
+                                        <tr align="center">
+                                            <td colspan="2" align="left">
+                                                <p:button outcome="accountRegistration" style="width: 150px; margin: 20px 0px 20px 0px;" value="Register New Account"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:form>
+                            </td>    
+                        </tr>                        
+                    </table>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

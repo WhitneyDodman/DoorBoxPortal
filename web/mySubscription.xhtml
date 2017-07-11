@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="DoorBox - My Account - Subscription Status Page"/>
+            <ui:param name="metaDescription" value="DoorBox Subscription Status Page"/>
+            <ui:param name="metaKeywords" value="doorbox subscription status"/>
+            <ui:define name="accountPage">
+                <h:form id="subscriptionForm">
+                    <p:panel id="panel" class="three-quarters account-view--right" header="PayPal Transaction Logs" >
+                        <p:dataTable id="txTable" var="tx" value="#{myPPSubscriptionBean.transactions}" rows="10" paginator="true"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                rowsPerPageTemplate="10,25,50">
+
+                            <p:column headerText="TX ID" style="font-size: 0.8em;" width="135">
+                                <!--h:outputText value="# {tx.txId}" style="font-size: 0.8em;"/-->
+                                <!-- <a href="https://sandbox.paypal.com/cgi-bin/webscr?cmd=_view-a-trans&amp;id=# {tx.txId}" target="_blank" style="font-size: 0.8em; color: blue; font-size: 0.8em; text-decoration: underline;" class="paypal-transaction"># {tx.txId}</a>-->
+                                <a href="https://paypal.com/cgi-bin/webscr?cmd=_view-a-trans&amp;id=#{tx.txId}" target="_blank" style="font-size: 0.8em; color: blue; font-size: 0.8em; text-decoration: underline;" class="paypal-transaction">#{tx.txId}</a>
+                                <!--h:link value="https://paypal.com/cgi-bin/webscr?cmd=_view-a-trans&id=# {tx.txId}" target="_blank" style="font-size: 0.8em;"/-->
+                            </p:column>
+
+                            <p:column headerText="State" style="font-size: 0.8em;" width="80">
+                                <h:outputText value="#{tx.txState}" style="font-size: 0.8em;"/>
+                            </p:column>
+
+                            <p:column headerText="Date" style="font-size: 0.8em;" width="125">
+                                <h:outputText value="#{tx.txDate}" style="font-size: 0.8em;">
+                                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm"/>
+                            </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Item" style="font-size: 0.8em;">
+                                <h:outputText value="#{tx.txItemNumber}" style="font-size: 0.8em;"/>
+                            </p:column>
+
+                            <p:column headerText="Amt" style="font-size: 0.8em;" width="65">
+                                <h:outputText value="#{tx.txAmt}" style="font-size: 0.8em;"/>
+                            </p:column>
+
+                            <p:column headerText="Cur" width="60" style="font-size: 0.8em;">
+                                <h:outputText value="#{tx.txCurrency}" style="font-size: 0.8em;"/>
+                            </p:column>
+
+                            <p:column headerText="CM" width="50" style="font-size: 0.8em;">
+                                <h:outputText value="#{tx.txCM}" style="font-size: 0.8em;"/>
+                            </p:column>
+
+                        </p:dataTable>
+                    </p:panel>
+                    <p:commandButton value="Clear Transactions" action="#{ppSubscriptionBean.clearTransactions}" update="@form" ajax="true">
+                        <p:confirm header="Confirmation" message="Permanently clear all transactions?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                    <p:commandButton value="Close" type="button" action="myAccountOverview" immediate="true" icon="ui-icon-cancel"/>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form> 
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

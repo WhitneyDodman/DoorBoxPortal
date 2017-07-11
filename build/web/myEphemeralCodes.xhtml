@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                <h:form>
+                    <p:panel id="panel" class="three-quarters account-view--right" header="Activity Logs" >
+                        <p:dataTable var="code" value="#{ephemeralCodeBean.ephemeralCodes}" rows="10" paginator="true" resizableColumns="true"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                rowsPerPageTemplate="10,25,50">
+                                <p:column rowspan="2" headerText="Doorbox" width="100">
+                                <h:outputText value="#{code.doorboxId}" />
+                            </p:column>
+                            <p:column rowspan="2" headerText="Recipient Name">
+                                <h:outputText id="recipientName" value="#{code.recipientName}" />
+                                <p:tooltip for="recipientName" value="#{code.recipientName}"/>
+                            </p:column>
+
+                            <p:column headerText="Destination">
+                                <h:outputText id="recipientEmail" value="#{code.recipientEmail}" rendered="#{not empty code.recipientEmail}"/>
+                                <p:tooltip for="recipientEmail" value="#{code.recipientEmail}"/>
+                                <br/>
+                                <h:outputText id="recipientPhone" value="#{code.recipientPhone}" rendered="#{not empty code.recipientPhone}"/>
+                                <p:tooltip for="recipientPhone" value="#{code.recipientPhone}"/>
+                            </p:column>
+
+                            <p:column headerText="Code" width="135">
+                                <h:outputText id="code" value="#{code.ephemeralCode}" />
+                                <p:tooltip for="code" value="#{code.ephemeralCode}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Start Date" width="125">
+                                <h:outputText value="#{code.startDate}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                </h:outputText>
+                                <br/>
+                                <h:outputText value="#{code.startDate}">
+                                    <f:convertDateTime pattern="HH:mm a" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="End Date" width="125">
+                                <h:outputText value="#{code.endDate}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                </h:outputText>
+                                <br/>
+                                <h:outputText value="#{code.endDate}">
+                                    <f:convertDateTime pattern="HH:mm a" />
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <p:panelGrid columns="2">
+                        <p:commandButton value="Close" action="myAccountOverview" immediate="true" icon="ui-icon-cancel"/>
+                    </p:panelGrid>
+                </h:form>               
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

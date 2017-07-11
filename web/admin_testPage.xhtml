@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Reset your account password"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                <h:form id="form">                        
+                    <p:panel id="panel" class="three-quarters account-view--right" header="Update My Password">
+
+                        <p:messages id="messages" showSummary="true" showDetail="true" autoUpdate="true" closable="true" />
+                                    
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel for="email" value="Test Email Template" style="font-weight:bold" />
+                            <p:commandButton value="Generate Email" id="updateButton" action="#{emailTemplateBean.test}" validateClient="true" ajax="false" icon="ui-icon-check"/>
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

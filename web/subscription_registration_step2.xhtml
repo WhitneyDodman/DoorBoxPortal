@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="mainTabIndex" value="tab0"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <h3>STEP 2: Confirm Subscription</h3>
+                    
+                    <strong>Subscription Order Confirmation.</strong>
+                    
+                    <p>You are subscribing to the DoorBox service for the monthly fee plus a one-time installation fee. Thereafter, you will see only the
+                        monthly fee appear on your statement. Transactions will appear from "THEDOORBOX", or "THEDOORBOXCOM".</p>
+                    <p>Due to the current billing setup, you will be billed in advance for this month but credited for the number of days that elapse
+                        from the time you subscribe (e.g. today) to the time we deliver, install, and activate your DoorBox (usually just a few days.)</p>                    
+                    <p>You will now be redirected to our secure PayPal payment processor to set up your DoorBox subscription. Upon completion, you will be
+                        returned here whereafter we will complete the creation of your account.</p>
+
+                    <b>Terms and Conditions</b>
+                        <p:scrollPanel style="width:800px;height:350px">
+                            <p>786200 Canada Inc. (aka “TheDoorBox”) agrees to allows you (hereinafter called &quot;the Customer&quot;) to rent it’s parcel delivery bin (hereinafter called &quot;TheDoorBox Bin&quot;) subject to the following terms and conditions:</p>
+                            <p>1. Customer may not assign, rent, or transfer the DoorBox Bin to anyone else.</p>
+                            <p>2. Customer shall not:</p>
+                            <ul type="a">
+                                <li>&nbsp;&nbsp;&nbsp;a) permit TheDoorBox to be used by any person other than Customer or its employees or agents;</li>
+                                <li>&nbsp;&nbsp;&nbsp;b) operate or use TheDoorBox or permit it to be operated or used in violation of any law; or</li>
+                                <li>&nbsp;&nbsp;&nbsp;b) operate, use, maintain or store TheDoorBox in a manner likely to cause damage to TheDoorBox.</li>
+                            </ul>
+<p>3. TheDoorBox Bin shall only be used in a careful and proper manner and shall not be used in any way that is inconsistent with the direction provided.</p>
+<p>4. Customer shall not remove TheDoorBox Bin from the address of the Customer location without prior written approval of the TheDoorBox.</p>
+<p>5. TheDoorBox may cancel or suspend the rental of TheDoorBox Bin to the Customer at any time without notice for any reason in its sole discretion.</p>
+<p>6. Limitation of Liability. Customer is responsible for the use of the TheDoorBox Bin. Customer assumes all risks inherent in the operation and use of TheDoorBox Bin. Customer assumes the entire responsibility for the defense of, and to pay, indemnify and hold TheDoorBox harmless from, and hereby release TheDoorBox from, any and all claims and liability for damage to property, packages or bodily injury (including death) resulting from the use, condition, operation, installation or possession of the TheDoorBox Bin.</p>
+<p>7. TheDoorBox is not responsible for any package not delivered to Customer or liable whatsoever for any damage to any package delivered to Customer regardless whether placed in TheDoorBox Bin or not.</p>
+<p>8. The Customer will be responsible for all expenses related to the repair of any damage to the DoorBox Bin while in their possession.</p>
+<p>9. Indemnification. Customer shall indemnify and hold TheDoorBox harmless from and against any and all claims, losses, liabilities, damages, expenses and costs (“Claim”) Including reasonable fees for attorneys, expert witnesses and litigation costs, and costs incurred in the settlement or avoidance of any such Claim, which result from or are in connection with any act or omission which results in harm to a third party giving rise to a Claim by or on behalf of such third party and against which TheDoorBox must defend.</p>
+<p>10. TheDoorBox may terminate this agreement immediately upon the failure of Customer to make rental payments when due.</p>
+<p>11. Customer will be billed the installation charge and monthly the rental rate quoted at the time TheDoorBox Bin was ordered once installed.</p>
+<p>12. Customer can cancel TheDoorBox at any time. If Customer cancels after installation, but before they have completed the minimum 12 month term, Customer will be charged an Early Termination Fee equal to the remaining months in the 12 month term to a maximum of $100.</p>
+<p>13. TheDoorBox will be responsible at its cost to retrieve TheDoorBox Bin upon the expiration or the termination of the rental agreement.</p>
+                    </p:scrollPanel>
+                    <br/>
+                    <b>Press the subscribe button to accept our terms and conditions and continue to PayPal.</b>
+                    
+                    
+                    <!--form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top"-->
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick"/>
+                        <input type="hidden" name="hosted_button_id" value="#{newSubscriberBean.hostedButtonId}"/>
+                        <input type="hidden" name="business" value="sales@thedoorbox.com"/>
+                        <input type="image" src="./images/#{newSubscriberBean.buttonImage}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
+                        <input type="hidden" name="first_name" VALUE="#{newSubscriberBean.firstname}"/>
+                        <input type="hidden" name="last_name" VALUE="#{newSubscriberBean.lastname}"/>
+                        <input type="hidden" name="address1" VALUE="#{newSubscriberBean.address1}"/>
+                        <input type="hidden" name="address2" VALUE="#{newSubscriberBean.address2}"/>
+                        <input type="hidden" name="city" VALUE="#{newSubscriberBean.city}"/>
+                        <input type="hidden" name="state" VALUE="#{newSubscriberBean.stateprov}"/>
+                        <input type="hidden" name="zip" VALUE="#{newSubscriberBean.postalcode}"/>
+                        <input type="hidden" name="country" VALUE="#{newSubscriberBean.country}"/>
+                        <input type="hidden" name="lc" VALUE="#{newSubscriberBean.country}"/>
+                        <input type="hidden" name="email" VALUE="#{newSubscriberBean.email}"/>
+                        <input type="hidden" name="night_phone_a" VALUE="#{fn:substring(newSubscriberBean.phone1, 1, 4)}"/>
+                        <input type="hidden" name="night_phone_b" VALUE="#{fn:substring(newSubscriberBean.phone1, 6, 9)}"/>
+                        <input type="hidden" name="night_phone_c" VALUE="#{fn:substring(newSubscriberBean.phone1, 10, 14)}"/>
+                        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+                    </form>
+
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

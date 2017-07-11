@@ -1,0 +1,7 @@
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.FileUploadRenderer</renderer-type>
+            <renderer-class>doorbox.portal.renderers.FileUploadRenderer</renderer-class>
+        </renderer>
+    </render-kit>

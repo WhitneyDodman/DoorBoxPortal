@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="DoorBox - My Account"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                    <h:form id="accountSettingsForm">
+                        <p:panel id="panel" class="three-quarters account-view--right" header="Account Details" >
+
+                            <f:event listener="#{myAccountBean.validatePassword}" type="postValidate" />
+                            <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+
+                            <p:panelGrid columns="2">
+                                <h:outputLabel for="accountId" value="Account ID" style="font-weight:bold; font-style: italic; color: lightslategray;" />
+                                <p:outputLabel id="accountId" value="#{myAccountBean.accountId}" style="font-weight: normal; color: lightslategray;"/>
+                                                                
+                                <h:outputLabel for="email" value="Email" style="font-weight:bold; font-style: italic; color: lightslategray; margin-bottom: 9px;" />
+                                <p:outputLabel id="email" value="#{myAccountBean.email}" style="font-weight: normal; color: lightslategray; margin-bottom: 10px;"/>                           
+
+                                <p:outputLabel for="firstname" value="First Name" style="font-weight:bold" />
+                                <p:inputText id="firstname" value="#{myAccountBean.firstname}" size="20" label="First Name" required="true">
+                                    <f:ajax render="firstnameMsg" event="keyup"/>
+                                </p:inputText>
+
+                                <p:outputLabel for="middlename" value="Middle Name" style="font-weight:bold" />
+                                <p:inputText id="middlename" value="#{myAccountBean.middlename}" size="20" label="Middle Name" required="false">
+                                    <f:ajax event="keyup" render="middlenameMsg"/>
+                                </p:inputText>
+
+                                <p:outputLabel for="lastname" value="Last Name" style="font-weight:bold" />
+                                <p:inputText id="lastname" value="#{myAccountBean.lastname}" size="20" label="Last Name" required="true">
+                                    <f:ajax event="keyup" render="lastnameMsg"/>
+                                </p:inputText>
+
+                                <p:outputLabel for="company" value="Company" style="font-weight:bold" />
+                                <p:inputText id="company" value="#{myAccountBean.company}" size="20" label="Company" required="false">
+                                    <f:ajax event="keyup" render="msgCompany" />
+                                </p:inputText>
+
+                                <p:outputLabel for="address1" value="Address 1" style="font-weight:bold" />
+                                <p:inputText id="address1" value="#{myAccountBean.address1}" size="32" label="Address 1" required="true">
+                                    <f:ajax render="msgAddress1" event="keyup" />
+                                </p:inputText>
+
+                                <p:outputLabel for="address2" value="Address 2" style="font-weight:bold" />
+                                <p:inputText id="address2" value="#{myAccountBean.address2}" size="32" label="Address 2" required="false">
+                                    <f:ajax render="msgAddress2" event="keyup" />
+                                </p:inputText>
+
+                                <p:outputLabel for="city" value="City" style="font-weight:bold" />
+                                <p:inputText id="city" value="#{myAccountBean.city}" size="20" label="City" required="true">
+                                    <f:ajax render="msgCity" event="keyup" />
+                                </p:inputText>
+
+                                <p:outputLabel for="stateprov" value="State/Province" style="font-weight:bold" />
+                                <p:selectOneMenu id="stateprov" value="#{myAccountBean.stateprov}" style="width:200px" required="true">
+                                    <f:selectItem itemLabel="Select State/Province" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{myAccountBean.stateprovs}" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="country" value="Country" style="font-weight:bold" />
+                                <p:selectOneMenu id="country" value="#{myAccountBean.country}" style="width:200px" required="true">
+                                    <!--p:ajax listener="# {myAccountBean.onCountryChange}" update="stateprov" /-->
+                                    <f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{myAccountBean.countries}" />
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="postalcode" value="Postal/Zip Code" style="font-weight:bold" />
+                                <p:inputText id="postalcode" value="#{myAccountBean.postalcode}" label="Postal/Zip Code" required="true">
+                                    <f:ajax render="postalcode" event="keyup" />
+                                </p:inputText>
+
+                                <p:outputLabel for="phone1" value="Phone 1" style="font-weight:bold" />
+                                <p:inputMask id="phone1" value="#{myAccountBean.phone1}" label="Phone 1" required="true" mask="(999) 999-9999">
+                                    <f:ajax render="phone1" event="keyup" />
+                                </p:inputMask>
+
+                                <p:outputLabel for="phone2" value="Phone 2" style="font-weight:bold" />
+                                <p:inputMask id="phone2" value="#{myAccountBean.phone1}" label="Phone 2" required="true" mask="(999) 999-9999">
+                                    <f:ajax render="phone2" event="keyup" />
+                                </p:inputMask>
+                            </p:panelGrid>
+                            
+                            <p:panelGrid columns="2">
+                                <p:commandButton value="Update" actionListener="#{myAccountBean.update}" validateClient="true" ajax="false" icon="ui-icon-check"/>                            
+                                <p:commandButton value="Cancel" action="myAccountOverview" immediate="true" icon="ui-icon-cancel"/>
+                            </p:panelGrid>
+
+                        </p:panel>
+                    </h:form>                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="DoorBox - Subscription Complete!"/>
+            <ui:param name="metaDescription" value="DoorBox Subscription Complete Landing Page"/>
+            <ui:param name="metaKeywords" value="doorbox subscription success"/>
+            <ui:define name="content">
+                <f:metadata>
+                    <f:viewParam name="tx" value="#{paypalPDTBean.transactionId}"/>
+                    <f:viewAction action="#{paypalPDTBean.init()}" />
+                    <f:viewParam name="tx" value="#{newSubscriberBean.transactionId}"/>
+                    <f:viewParam name="st" value="#{newSubscriberBean.transactionState}"/>
+                    <f:viewParam name="amt" value="#{newSubscriberBean.transactionState}"/>
+                    <f:viewParam name="item_number" value="#{newSubscriberBean.transactionItemNumber}"/>
+                    <f:viewParam name="cc" value="#{newSubscriberBean.transactionCurrency}"/>
+                    <f:viewParam name="cm" value="#{newSubscriberBean.transactionCM}"/>
+                    <f:viewAction action="#{newSubscriberBean.activateAccount()}" />
+                </f:metadata>
+                
+                <main class="wrapper main-content" role="main">
+                    <c:choose>
+                        <c:when test="#{newSubscriberBean.transactionState.equals('Completed')}">
+                            <h2>Thank You for Becoming a DoorBox Customer!</h2>
+
+                            <p>Your transaction <strong>#{newSubscriberBean.transactionId}</strong> completed successfully. Please record this number for your records.
+                                Your subscription receipt has also been emailed to you. You can log into your account at PayPal.com to view details of this transaction.</p>
+
+                            <p>So, what happens now?</p>
+
+                            <p>Your account has been created and is now awaiting activation. Our DoorBox staff will contact you within one business day to set up
+                                an appointment to deliver and install your DoorBox.</p>
+
+                            <p>Now, if you would kindly log in with your new credentials, you can have a look around and review your account details.</p>
+
+                            <a class="btn" style="margin: 15px 0px 15px 0px;" href="/login.xhtml">Continue to the Login Page</a>
+                        </c:when>
+                        <c:otherwise>
+                           <h2>Sorry, your DoorBox Subscription Was Not Successful</h2>
+                           <p>Unfortunately, there was a problem with your subscription. Please verify your payment details and try again. If you continue to have issues,
+                           please do not hesitate to contact us for assistance.</p>
+                           <a class="btn" style="margin: 15px 0px 15px 0px;" href="">Return to Shop Page</a>
+                        </c:otherwise>
+                    </c:choose>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

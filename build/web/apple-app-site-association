@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "E3SQ6YEGZH.com.thedoorbox.DoorBox",
+                "paths": ["*"]
+            }
+        ]
+    }
+}

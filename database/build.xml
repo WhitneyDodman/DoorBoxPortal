@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="doorbox_database" default="test" basedir=".">
+    <property name="sql.userid" value="dbadmin"/>
+    <property name="sql.server" value="localhost"/>
+    <property name="sql.port" value="3306"/>
+    <property name="sql.password" value="Lertindu01!"/>
+    <property name="sql.database" value="doorbox"/>
+    <property name="sql.connector" value="../lib/mysql-connector-java-5.1.23-bin.jar" />
+    <property name="sql.driver" value="com.mysql.jdbc.Driver"/>
+    <property name="sql.url" value="jdbc:mysql://${sql.server}:${sql.port}/${sql.database}?useUnicode=true&amp;characterEncoding=UTF-8"/>
+    <property name="build.sysclasspath" value="last"/>
+
+    <target name="test">
+        <sql userid="${sql.userid}" password="${sql.password}" url="${sql.url}" driver="${sql.driver}" classpath=".;../lib">            
+            <classpath>
+                <pathelement location="${sql.connector}" />
+            </classpath>
+            <transaction src="test.sql"/>
+        </sql>
+    </target>
+
+    <target name="buildDatabase" >
+        <sql userid="${sql.userid}" password="${sql.password}" print="true" onerror="continue" url="${sql.url}" driver="${sql.driver}">
+            <classpath>
+                <pathelement location="${sql.connector}"/>
+            </classpath>
+            <!-- Drop entire database and build from scratch -->
+            <transaction src="drop_database"/>
+            <transaction src="create_database"/>
+            
+            <transaction src="create_tables.sql"/>
+            <transaction src="create_triggers.sql"/>
+            <transaction src="create_constraints.sql"/>
+            
+            <transaction src="preload/account.sql"/>
+            <transaction src="preload/sequence.sql"/>
+            <transaction src="preload/subscription.sql"/>
+            <transaction src="preload/doorbox.sql"/>
+            <transaction src="preload/events.sql"/>
+            
+        </sql>
+    </target>
+    
+    <target name="buildSchema" >
+        <sql userid="${sql.userid}" password="${sql.password}" print="true" onerror="continue" url="${sql.url}" driver="${sql.driver}">
+            <classpath>
+                <pathelement location="${sql.connector}"/>
+            </classpath>
+            <!-- Drop schema and build/populate from scratch -->
+            <transaction src="drop_constraints.sql"/>
+            <transaction src="drop_triggers.sql"/>
+            <transaction src="drop_tables.sql"/>
+            
+            <transaction src="create_tables.sql"/>
+            <transaction src="create_triggers.sql"/>
+            <transaction src="create_constraints.sql"/>
+            
+            <transaction src="preload/account.sql"/>
+            <transaction src="preload/sequence.sql"/>
+            <transaction src="preload/subscription.sql"/>                        
+            <transaction src="preload/doorbox.sql"/>
+        </sql>
+    </target>
+        
+    <target name="clean">
+        <sql userid="${sql.userid}" password="${sql.password}" print="true" onerror="continue" url="${sql.url}" driver="${sql.driver}">
+            <classpath>
+                <pathelement location="${sql.connector}"/>
+            </classpath>
+            <!-- Clean all tables and return them to factory defaults -->
+            <transaction src="clean.sql"/>
+            <transaction src="preload/account.sql"/>
+            <transaction src="preload/sequence.sql"/>
+        </sql>
+    </target>    
+
+</project>

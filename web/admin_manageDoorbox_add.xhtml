@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                <p:panel id="panel" class="three-quarters account-view--right" header="Add DoorBox" >
+                    <h:form id="addDoorboxForm">  
+                        <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+                        <p:panelGrid  columns="2" columnClasses="label,value" style="border: 0px;">
+
+                            <p:outputLabel for="uniqueId" value="Your Unique Id" style="font-weight:bold" />
+                            <p:inputText id="uniqueId" value="#{myDoorboxBean.uniqueId}" size="32" label="Unique Id" required="true">
+                                <f:ajax render="msgUniqueId" event="keyup" />
+                                <p:tooltip for="uniqueId" value="Use this field to give your DoorBox a familiar name" />
+                            </p:inputText>
+
+                            <p:outputLabel for="locationDescription" value="Location Description" style="font-weight:bold" />
+                            <p:inputText id="locationDescription" value="#{myDoorboxBean.locationDescription}" size="32" label="locationDescription">
+                                <p:tooltip for="locationDescription" value="Example: 'Front Porch', or 'At west side of building'" />
+                                <f:ajax render="msgLocationDescription" event="keyup" />
+                            </p:inputText>
+
+                            <p:outputLabel for="photoUrl" value="Photo" style="font-weight:bold;" />
+                            <p:panelGrid columns="1" style="margin: 0px; padding: 0px; border: 0px;">
+                                <h:graphicImage id="tmpImage" url="#{myDoorboxBean.tempImageFilename}"/>
+                                <p:fileUpload id="photoUrl" fileUploadListener="#{myDoorboxBean.uploadFile}" mode="advanced" dragDropSupport="false"
+                                    update="messages tmpImage" sizeLimit="10000000" fileLimit="1" multiple="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                            </p:panelGrid>
+                            
+                            <p:outputLabel for="doorboxModel" value="Doorbox Model" style="font-weight:bold" />
+                            <p:selectOneMenu id="doorboxModel" value="#{myDoorboxBean.selectedModelId}" style="width:300px" required="true">
+                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItems value="#{myDoorboxBean.doorboxModelsList}" var="model" itemLabel="#{model.modelNumber}" itemValue="#{model.modelId}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="address1" value="Address 1" style="font-weight:bold" />
+                            <p:inputText id="address1" value="#{myDoorboxBean.address1}" size="32" label="Address 1" required="true">
+                                <f:ajax render="msgAddress1" event="keyup" />
+                            </p:inputText>
+
+                            <p:outputLabel for="address2" value="Address 2" style="font-weight:bold" />
+                            <p:inputText id="address2" value="#{myDoorboxBean.address2}" size="32" label="Address 2" required="false">
+                                <f:ajax render="msgAddress2" event="keyup" />
+                            </p:inputText>
+
+                            <p:outputLabel for="city" value="City" style="font-weight:bold" />
+                            <p:inputText id="city" value="#{myDoorboxBean.city}" size="20" label="City" required="true">
+                                <f:ajax render="msgCity" event="keyup" />
+                            </p:inputText>
+
+                            <p:outputLabel for="stateprov" value="State/Province" style="font-weight:bold" />
+                            <p:selectOneMenu id="stateprov" value="#{myDoorboxBean.stateprov}" style="width:200px" required="true">
+                                <f:selectItem itemLabel="Select State/Province" itemValue="#{myDoorboxBean.selectedStateprov}" noSelectionOption="true" />
+                                <f:selectItems value="#{myDoorboxBean.stateprovs}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="country" value="Country" style="font-weight:bold" />
+                            <p:selectOneMenu id="country" value="#{myDoorboxBean.country}" style="width:200px" required="true">
+                                <f:selectItem itemLabel="Select Country" itemValue="#{myDoorboxBean.selectedCountry}" noSelectionOption="true" />
+                                <f:selectItems value="#{myDoorboxBean.countries}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="postalcode" value="Postal/Zip Code" style="font-weight:bold" />
+                            <p:inputText id="postalcode" value="#{myDoorboxBean.postalcode}" label="Postal/Zip Code" required="true">
+                                <f:ajax render="postalcode" event="keyup" />
+                            </p:inputText>
+
+                            <p:outputLabel for="longitude" value="Longitude" style="font-weight:bold" />
+                            <p:inputText id="longitude" value="#{myDoorboxBean.longitude}" label="Longitude" required="false">
+                                <f:ajax render="longitude" event="keyup" />
+                            </p:inputText>
+
+                            <p:outputLabel for="latitude" value="Latitude" style="font-weight:bold" />
+                            <p:inputText id="latitude" value="#{myDoorboxBean.latitude}" label="Latitude" required="false">
+                                <f:ajax render="latitude" event="keyup" />
+                            </p:inputText>
+                        </p:panelGrid>
+                        <hr/>
+                        <p:panelGrid  columns="2" columnClasses="label,value" style="border: 0px;">
+                            <p:outputLabel for="initDate" value="Initialization Date" style="font-weight:bold" />
+                            <p:calendar id="initDate" value="#{myDoorboxBean.initDate}" pattern="yyyy-MM-dd HH:mm" />
+
+                            <p:outputLabel for="seed" value="Seed" style="font-weight:bold" />
+                            <p:inputText id="seed" value="#{adminDoorboxBean.seed}" size="10" required="true">
+                                <f:ajax render="seed" event="keyup" />
+                            </p:inputText>
+                            
+                            <p:outputLabel for="masterCode" value="Master Code" style="font-weight:bold" />
+                            <p:inputText id="masterCode" value="#{myDoorboxBean.masterCode}" label="Master Code" required="true">
+                                <f:ajax render="masterCode" event="keyup" />
+                            </p:inputText>
+
+                            <p:outputLabel for="subMasterCode" value="Sub-master Code" style="font-weight:bold" />
+                            <p:inputText id="subMasterCode" value="#{myDoorboxBean.subMasterCode}" label="Sub-master Code" required="true">
+                                <f:ajax render="subMasterCode" event="keyup" />
+                            </p:inputText>
+                            
+                        </p:panelGrid>
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="Add DoorBox" action="#{myDoorboxBean.addNewDoorbox}" validateClient="true" ajax="false" icon="ui-icon-check"/>
+                            <p:commandButton value="Cancel" action="myDoorboxes" immediate="true" icon="ui-icon-cancel"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:panel>          
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

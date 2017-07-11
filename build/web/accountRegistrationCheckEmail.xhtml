@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Confirm Registration"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <table align="center" width="100%" border="0" style="table-border: none;">
+                        <tr>
+                            <td width="45%">
+                                <img align="center" src="images/TheDoorBox.png" />
+                            </td>
+                            <td width="55%">
+                                <h2>Confirmation Email Sent</h2>
+                                <h:form id="resetPasswordForm" >
+                                    <table width="100%" style="table-border: none;">
+                                        <tr>
+                                            <td valign="top" colspan="2" align="left">
+                                                <div class="hintText">Thank you for registering with The DoorBox. You should now check for a confirmation email and follow the link to complete the registration process. Once you have confirmed, you may log into your new account.</div>
+                                                <div class="hintText">Note: The registration link expires in one hour. If you don't receive this confirmation within a few minutes, please check your SPAM folder.</div>
+                                            </td>
+                                            <td valign="top" colspan="1" align="left">
+                                                <p:messages class="login-error"/>
+                                            </td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td colspan="2" align="right">
+                                                <h:link value="Return to the login page" outcome="login.xhtml"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:form>
+                            </td>    
+                        </tr>                        
+                    </table>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

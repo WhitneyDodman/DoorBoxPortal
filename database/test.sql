@@ -1,0 +1,3 @@
+USE DOORBOX;
+
+show tables;

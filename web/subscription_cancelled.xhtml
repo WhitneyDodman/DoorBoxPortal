@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="DoorBox - Subscription Cancelled"/>
+            <ui:param name="metaDescription" value="DoorBox Subscription Cancelled Landing Page"/>
+            <ui:param name="metaKeywords" value="doorbox subscription"/>
+            <ui:define name="scripts">
+                <script src="https://www.google.com/recaptcha/api.js"></script>
+            </ui:define>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <f:metadata>
+                        <f:viewParam name="g-recaptcha-response" />
+                    </f:metadata>
+                    <div class="three-quarters grid-image--centered">
+                        <div class="grid-item">
+                            <h:form id="userRegForm">
+
+                                    <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+
+                                    <h2>Oh! What Happened?</h2>
+                                    <p style="font-size: 18px">Please accept our apologies if this was an error on our part or if you just didn't feel comfortable completing the transaction.
+                                    We are very interested to know why you canceled your subscription so we can make amends and do better next time. If you could,
+                                    would you kindly leave feedback so we know what happened?</p>
+                                    <br/>
+                                    <p><strong>Reason for Cancellation</strong></p>
+                                    
+                                    <p:panelGrid>
+                                        <p:row>                                    
+                                            <p:column>
+                                                <h:outputLabel for="name">Your name</h:outputLabel>
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText id="name" value="#{cancellationFormBean.name}" label="Name" required="true" size="32"/>
+                                            </p:column>
+                                        </p:row>
+
+                                        <p:row>                                    
+                                            <p:column>
+                                                <h:outputLabel for="email" value="Email"/>
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText id="email" value="#{cancellationFormBean.email}" label="Email" required="true" size="32"/>                                                    
+                                            </p:column>
+                                        </p:row>
+
+                                        <p:row>
+                                            <p:column>
+                                                <p:outputLabel for="phone" value="Phone"/>
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputMask id="phone" value="#{cancellationFormBean.phone}" label="Phone" required="true" mask="(999) 999-9999" size="15"/>
+                                            </p:column>
+                                        </p:row>
+
+                                        <p:row>
+                                            <p:column>
+                                                <p:outputLabel for="message" value="Message"/>
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputTextarea id="message" value="#{cancellationFormBean.message}" label="Message" required="true" rows="8" cols="60" maxlength="1024"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2"><div style="margin-top:10px;"/></p:column>
+                                        </p:row>
+                                        
+                                        <p:row>
+                                            <p:column>
+                                                <p:outputLabel value="Are you a Robot?"/>
+                                            </p:column>
+                                            <p:column>
+                                                <div class="g-recaptcha" data-sitekey="6LdTgyYTAAAAAK-eV-j2VsN8zcZx_DOoSSyUvTY2" ></div>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2" style="padding-top: 35px;">
+                                                <p:commandButton value="Tell Us What Happened! :-)" action="#{cancellationFormBean.sendMessage}" validateClient="true" ajax="false" icon="ui-icon-check"/>
+                                                <p:commandButton value="Don't Tell Us How to Improve :-(" action="/shop.xhtml" immediate="true" icon="ui-icon-cancel"/>
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                            </h:form>
+                        </div>
+                    </div>                    
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

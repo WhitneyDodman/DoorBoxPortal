@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="description" content="#{metaDescription}"/>
+        <meta name="keywords" content="#{metaKeywords}"/>
+        <title>DoorBox - #{title}</title>
+        <link href="./css/timber.css" rel="stylesheet" type="text/css" />
+        <link href="./css/themeOverride.css" rel="stylesheet" type="text/css" />
+        <ui:insert name="stylesheets"/>
+        <script src="js/facebook.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-89096204-2', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <ui:insert name="scripts"/>
+        <ui:insert name="htmlhead" />
+    </h:head>    
+    <h:body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="grid--full">
+                    <div class="mobile-nav--sticky">
+                        <div class="grid-item medium--hide large--hide one-half mobile-nav__item">
+                            <div id="mobileNavBar">
+                                <button class="menu-toggle btn-link mobile-nav-bar__link">
+                                    <span class="icon-fallback-text">
+                                        <span class="icon icon-menu" aria-hidden="true"></span>
+                                    </span>
+                                    Menu
+                                </button>
+                            </div>
+                        </div>
+                        <div class="grid-item medium--hide large--hide one-half text-right mobile-nav__item">
+                            <a href="http://thedoorbox.com/shop" class="cart-toggle mobile-nav-bar__link">
+                                Shop
+                                <span class="cart-icon-wrapper">
+                                    <span class="icon-fallback-text">
+                                        <span class="icon icon-cart" aria-hidden="true"></span>
+                                    </span>
+                                    <span class="cart-count hidden-count">0</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="grid-item one-quarter small--hide header-login-wrapper">
+                        <!-- top left corner content for rent -->
+                        <div id="fb-root"></div>
+                        <div class="fb-like" data-href="https://www.facebook.com/theDoorBox/" data-width="60" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" style="margin-top: 10px;"></div>
+                    </div>
+                    <div class="grid-item large--one-half medium--one-half header-logo-wrapper">
+                        <div class="h1 header-logo" itemscope="" itemtype="http://schema.org/Organization">
+                            <a href="index.xhtml" itemprop="url">
+                                <img src="images/logo.png" width="300" alt="thedoorbox.com" itemprop="logo"/>
+                            </a>
+                            <h1 class="header-message">Your Parcel Has Arrived!</h1>
+                        </div>
+                    </div>
+                    <div class="grid-item one-quarter small--hide header-cart-wrapper">
+                        <c:choose>
+                            <c:when test="${authBean.loggedIn == true}">
+                                <div style="margin-top: 5px;">Logged in as: <span style="font-weight: bold;">${authBean.email}</span></div>
+                                <div>
+                                    <h:form>
+                                        <h:commandLink class="db-login-icon" action="#{authBean.logout_action()}">
+                                            Sign Out
+                                            <span class="icon-fallback-text">
+                                                <span class="icon icon-user" aria-hidden="true"></span>
+                                            </span>
+                                        </h:commandLink>
+                                    </h:form>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div style="margin-top: 5px;">You are not logged in</div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <hr class="visible--small hr--header"/>
+         <nav class="wrapper nav-bar" role="navigation">
+            <!-- site-nav.liquid -->
+            <ul class="site-nav" id="accessibleNav">
+
+                <li class="site-nav--active">
+                    <a href="./index.xhtml">Home</a>
+                </li>
+
+                <li >
+                    <a href="./howDoorBoxWorks.xhtml">How DoorBox Works</a>
+                </li>
+
+                <li >
+                    <a href="./shop.xhtml">Shop</a>
+                </li>
+
+                <li >
+                    <a href="./faq.xhtml">FAQ</a>
+                </li>
+
+                <li>
+                    <a href="./contactUs.xhtml">Contact Us</a>
+                </li>
+                <li>
+                    <c:choose>
+                        <c:when test="${authBean.loggedIn == true}">
+                            <a href="myAccountOverview.xhtml"><b>My Account</b></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="https://portal.thedoorbox.com/login.xhtml">My Account</a>                        
+                        </c:otherwise>
+                    </c:choose>                        
+                </li>
+
+            </ul>
+        </nav>
+        <div class="content">
+            <ui:insert name="content">
+                Default Content
+            </ui:insert>
+        </div>
+        <div class="push"></div>
+        <div class="footer">
+
+            <footer class="site-footer" role="contentinfo">
+                <div class="wrapper wrapper-footer-body">
+                    <hr/>
+                    <div class="grid">          
+                        <div class="grid-item medium--one-half large--one-quarter">
+                            <h3 class="footer-heading">Quick Links</h3>
+                            <ul class="footer-quick-links">                
+                                <li><a href="./shop.xhtml">Shop</a></li>
+                                <li><a href="./howDoorBoxWorks.xhtml">How The Doorbox Works</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="grid-item medium--one-half large--one-quarter">
+                            <h3 class="footer-heading">Get Connected</h3>
+                            <div class="custom-content">
+                                Phone:
+                                <br/>
+                                <a href="tel:6479465410">(647) 946-5410</a>
+                                <br/>
+                                Email:
+                                <br/>
+                                <a href="mailto:info@thedoorbox.com?subject=Customer%20Inquiry" target="_blank">info@thedoorbox.com</a>
+                                <ul class="inline-list social-icons">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="grid-item medium--one-half large--one-quarter">
+                            <h3 class="footer-heading">Mobile App</h3>
+                            <ul class="footer-quick-links">
+                                <li><a href="./iosWelcome.xhtml">Get DoorBox for iPhone</a></li>
+                                <li>Android Coming Soon!</li>
+                            </ul>                            
+                        </div>
+                        <!--div class="grid-item medium- -one-half large- -one-quarter">
+                            <h3 class="footer-heading">Newsletter</h3>
+                            <form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="input-group form-newsletter-signup">
+                                <label for="EMAIL">Sign up for promos</label>
+                                <input type="email" value="" placeholder="Email Address" name="EMAIL" id="mail" class="input-group-field" aria-label="Email Address" autocorrect="off" autocapitalize="off" />
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn icon-fallback-text" name="subscribe" id="subscribe"><span class="icon icon-check" aria-hidden="true"></span><span class="fallback-text">Subscribe</span></button>
+                                </span>
+                            </form>
+                        </div-->          
+                        <div class="grid-item medium--one-half large--one-quarter">
+                            <h3 class="footer-heading">Social Media</h3>
+                            <ul class="footer-quick-links">
+                                <li><a href="http://facebook.com/theDoorBox">DoorBox on Facebook</a></li>
+                            </ul>
+                        </div>          
+                    </div>
+                </div>
+
+                <div class="wrapper wrapper-footer-legal">
+                    <hr/>
+                    <div class="grid">
+                        <div class="grid-item wrapper-legal large--one-half">
+                            <p>
+                                <small>© 2016, thedoorbox.com. All Rights Reserved.</small>
+                                <small><a target="_blank" rel="nofollow" href="https://portal.thedoorbox.com">The DoorBox Portal - Powered by TIT</a></small>
+                            </p>
+                        </div>
+
+                        
+                        <div class="grid-item wrapper-accepted-payments large--one-half">
+                            <img class="payment-icons" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppppcmcvdam.png" alt="Credit Card Badges" />
+                        </div>
+                        
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </h:body>    
+</html>

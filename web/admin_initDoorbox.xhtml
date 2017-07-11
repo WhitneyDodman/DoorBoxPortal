@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <body>        
+        <ui:composition template="./WEB-INF/templates/adminView.xhtml">
+            <ui:param name="title" value="DoorBox - DoorBox Initialization Utility Page"/>
+            <ui:param name="metaDescription" value="DoorBox Initialization"/>
+            <ui:param name="metaKeywords" value="doorbox initialzation"/>
+            <ui:define name="adminPage">
+                <h:form id="userRegForm">                        
+                    <p:panel id="panel" class="three-quarters account-view--right" header="Initialize KL1000NC Lock">
+                        <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+                                    
+                        <p:panelGrid>
+                            <p:row>
+                                <p:column colspan="2">DoorBox KL1000 Lock Initialization Values</p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><p:outputLabel for="initDate" value="Init Date (GMT)" /></p:column>
+                                <p:column>
+                                    <p:inputText id="initDate" value="#{adminInitDoorboxBean.initDate}" size="14" readonly="true">
+                                        <f:convertDateTime pattern="yyMMddhhmm"/>
+                                    </p:inputText>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><p:outputLabel for="seed" value="Seed" style="font-weight:bold" /></p:column>
+                                <p:column><p:inputText id="seed" value="#{adminInitDoorboxBean.seed}" size="10" readonly="true" required="true" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><p:outputLabel for="masterCode" value="Master Code" style="font-weight:bold" /></p:column>
+                                <p:column><p:inputText id="masterCode" value="#{adminInitDoorboxBean.masterCode}" size="14" readonly="true" required="true" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><p:outputLabel for="subMasterCode" value="Sub-Master Code" style="font-weight:bold" /></p:column>
+                                <p:column><p:inputText id="subMasterCode" value="#{adminInitDoorboxBean.subMasterCode}" size="14" readonly="true" required="true"/></p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><p:outputLabel for="userCode" value="User Code" style="font-weight:bold" /></p:column>
+                                <p:column><p:inputText id="userCode" value="#{adminInitDoorboxBean.userCode}" size="8"/></p:column>
+                            </p:row>
+                        </p:panelGrid>
+                        
+                        <br/>
+                        <p:row>
+                            <p:column colspan="2">
+                                <p:accordionPanel>
+                                    <p:tab title="Factory Reset Instructions - Click to expand">
+                                        <ol>
+                                            <li>Remove one battery.</li>
+                                            <li>While holding down the 1 key, insert battery and keep holding button until the blue LED flashes twice.</li>
+                                            <li>Within three seconds, press the 1 key three times.</li>
+                                            <li>The blue LED will flash twice, then the blue and red lights followed by a motor ratcheting sound.</li>
+                                            <li>Your lock is now reset to the factory defaults with a master code of 11335577.</li>
+                                        </ol>
+                                    </p:tab>
+                                </p:accordionPanel>                               
+                            </p:column>
+                        </p:row>
+                        <br/>                                               
+                        <p:row>
+                            <p:column colspan="2">Step 1: Enter factory master code and open latch to expose green octathorpe (#) button</p:column>
+                        </p:row>
+                        <br/>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="# 11335577 •"/>
+                            </p:column>
+                        </p:row>
+                        <br/>
+                        <p:row>
+                            <p:column colspan="2">Step 2: Initialize the lock with a relatively current GMT date and time before countdown reaches 0</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel id="setInitDate" value="#{adminInitDoorboxBean.getInitCodeButtonSequence(true)}">
+                                    <p:poll interval="1" update="setInitDate" />
+                                </p:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <br/>
+                        <p:row>
+                            <p:column colspan="2">Step 3: Program the Sub-Master Code</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column><p:outputLabel id="setSubmasterCode" value="#{adminInitDoorboxBean.getSubMasterCodeButtonSequence(true)}" /></p:column>
+                        </p:row>
+                        <br/>
+                        <p:row>
+                            <p:column colspan="2">Step 4: Program the User Code</p:column>
+                        </p:row>
+                        <br/>
+                        <p:row>
+                            <p:column><p:outputLabel id="setUserCode" value="#{adminInitDoorboxBean.getUserCodeButtonSequence (true)}" /></p:column>
+                        </p:row>
+                        <br/>
+                        <p:row>
+                            <p:column colspan="2">Step 5: Program the Master Code</p:column>
+                        </p:row>
+                        <br/>
+                        <p:row>
+                            <p:column><p:outputLabel id="setMasterCode" value="#{adminInitDoorboxBean.getMasterCodeButtonSequence(true)}" /></p:column>
+                        </p:row>
+                        <br/>                        
+                        
+                        <p:panelGrid columns="4">
+                            <p:commandButton value="Randomize" id="generateButton" action="#{adminInitDoorboxBean.randomize}" ajax="false" icon="ui-icon-check" />
+                            <p:commandButton value="Reserve" id="commitButton" action="#{adminInitDoorboxBean.reserve}" validateClient="true" ajax="false" icon="ui-icon-check" />
+                            <p:commandButton value="Cancel" action="myAccountOverview" immediate="true" icon="ui-icon-cancel"/>
+                        </p:panelGrid>
+                        
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

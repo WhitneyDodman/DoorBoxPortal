@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>
+        <ui:composition template="global.xhtml">
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <div class="product" style="margin: 10px;">
+                        <ui:insert name="product">
+                            Product Details
+                        </ui:insert>
+                    </div>
+                    <!-- snippets/related-products.liquid -->
+                    <hr/>
+                    <div class="carousel text-center">
+                        <span class="carousel__title h4">More from this collection</span>
+                        <div class="grid-uniform carousel__items carousel-items owl-carousel">
+
+                            <!-- snippets/product-grid-item.liquid -->
+                            <div class="product-item fluid-grid-item text-center">
+                                <div class="grid-image">
+                                    <a href="largeDoorbox.xhtml" class="grid-image--centered">
+                                        <img src="//cdn.shopify.com/s/files/1/0923/6628/products/Doorbox-large_37e3ecfb-b803-432c-8c60-52af95b36563_large.jpg?v=1444088906" alt="Large DoorBox"/>
+                                    </a>
+                                </div>
+
+                                <p class="product-item__name">
+                                    <a href="largeDoorbox.xhtml">Large DoorBox</a>
+                                </p>
+                                <p class="product-item__price">
+                                    <span class="product-item__price">
+                                        <sup>$</sup>499
+                                    </span>
+                                </p>
+                            </div>
+
+                            <!-- snippets/product-grid-item.liquid -->
+                            <div class="product-item fluid-grid-item text-center">
+
+                                <div class="grid-image">
+                                    <a href="mediumDoorbox.xhtml" class="grid-image--centered">
+                                        <img src="//cdn.shopify.com/s/files/1/0923/6628/products/doorbox-main_large.png?v=1444002949" alt="Medium DoorBox"/>
+                                    </a>
+                                </div>
+
+                                <p class="product-item__name">
+                                    <a href="mediumDoorbox.xhtml">Medium DoorBox</a>
+                                </p>
+                                <p class="product-item__price">
+                                    <span class="product-item__price">
+                                        <sup>$</sup>299
+                                    </span>
+                                </p>
+                            </div>
+
+                            <!-- snippets/product-grid-item.liquid -->
+                            <div class="product-item fluid-grid-item text-center">
+                                <div class="grid-image">
+                                    <a href="smallDoorbox.xhtml" class="grid-image--centered">
+                                        <img src="//cdn.shopify.com/s/files/1/0923/6628/products/doorbox-small_large.jpg?v=1443053129" alt="Small DoorBox"/>
+                                    </a>
+                                </div>
+
+                                <p class="product-item__name">
+                                    <a href="smallDoorbox.xhtml">Small DoorBox</a>
+                                </p>
+                                <p class="product-item__price">
+                                    <span class="product-item__price">
+                                        <sup>$</sup>249
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

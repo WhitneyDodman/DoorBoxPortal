@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="stylesheets">
+                <link rel="stylesheet" href="./css/timber.css" />
+                <link rel="stylesheet" href="./css/button.css" />
+            </ui:define>
+            <ui:define name="scripts">
+                <script src="./js/jquery-1.11.2.min.js" type="text/javascript"></script>
+                <script src="./js/timber.min.114.js" type="text/javascript"></script>
+                <script type="text/javascript">
+                    $(document).ready(function ($) {
+                        $('#accordion').find('.accordion-toggle').click(function () {
+                            //Expand or collapse this panel
+                            $(this).next().slideToggle('fast');
+                            //Hide the other panels
+                            $(".accordion-content").not($(this).next()).slideUp('fast');
+                        });
+                    });
+                </script>
+            </ui:define>
+
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <div class="grid--full">
+                        <div class="rte">
+                            <h2>Frequently Asked Questions</h2>
+                            
+                            <div class="faq-page">
+                                <div id="accordion">
+                                    <div class="faq-header"><b>Our plans for DoorBox!</b></div>
+                                    <p class="doorbox-plans">
+                                        <br/>
+                                        <br/>
+                                        Our goal is to make online shopping hassle free, remove the frustration of missing that important delivery and to protect your important online purchases from the elements and "porch pirates".&nbsp;
+                                        <br/>
+                                        <br/> We have big plans for DoorBox!&nbsp; We designed the DoorBox to allow you to easily swap your current lock for future lock upgrades.&nbsp; Our future plans include adding features such as remote
+                                        unlocking from our mobile app, remote notification via SMS or email, and telemetry so you know immediately when a package is delivered or picked up, what code is used, and failed code attempts. All
+                                        these features and more coming soon.&nbsp; Stay tuned as we evolve the DoorBox service to keep it fresh, interesting, and convenient!
+                                    </p>
+                                    <p>&nbsp;</p>
+                                    <div id="accordion">
+                                        <h4 class="accordion-toggle">How is the DoorBox powered?</h4>
+                                        <div class="accordion-content">
+                                            <p>The DoorBox lock requires two standard AAA batteries to operate.&nbsp; These batteries are already installed and your lock initialized when you buy your DoorBox.&nbsp; Your batteries will provide you approximately 15,000 openings.</p>
+                                        </div>
+                                        <!--h4 class="accordion-toggle">Do I need to connect my DoorBox lock to my home Wi-Fi connection?</h4>
+                                        <div class="accordion-content">
+                                            <p>No, your DoorBox does not require an Internet connection! Each DoorBox lock has a built-in clock and algorithm allowomg you to generate temporary access codes that only work for the date and times you select.</p>
+                                        </div-->
+                                        <h4 class="accordion-toggle">Can the DoorBox cope with multiple deliveries?</h4>
+                                        <div class="accordion-content">
+                                            <p>Yes, this is one of DoorBox’s unique features. The DoorBox lock uses a code entry system, meaning that whoever has the code can deliver parcels securely to your DoorBox time after time.</p>
+                                        </div>
+                                        <h4 class="accordion-toggle">Can you install the DoorBox outside?</h4>
+                                        <div class="accordion-content">
+                                            <p>Yes, the DoorBox has been designed and manufactured specifically for outside use. Using a pre-coating process on a steel substrate, the DoorBox has then been further treated and painted to withstand outdoor weather.</p>
+                                        </div>
+                                        <h4 class="accordion-toggle">What happens if the parcel needs a signature?</h4>
+                                        <div class="accordion-content">
+                                            <p>Each DoorBox has a unique number situated inside the lid and very visible to couriers that acts as a proof of signature. Couriers prefer to deliver their parcels the first time and therefore the unique number under the DoorBox lid is becoming more widely accepted as proof of delivery. However there may be the occasional delivery that requires a hand written signature.</p>
+                                        </div>
+                                        <h4 class="accordion-toggle">What sizes do the DoorBox come in?</h4>
+                                        <div class="accordion-content">
+                                            <h3 class="faq-header-1">The Small DoorBox™ is the smallest of the DoorBox family</h3>
+                                            <div class="faq-sizing">
+                                                <p class="faq1"><strong>Height:</strong> (back) 22" (front) 18.5"</p>
+                                                <p class="faq1"><strong>Width:</strong> 12.5"</p>
+                                                <p class="faq1"><strong>Depth:</strong> 11.2"</p>
+                                                <p class="faq1"><strong>Entry/Opening Area:</strong> Width: 10.4", Depth: 8.26”</p>
+                                            </div>
+                                            <h3 class="faq-header-1">The Medium DoorBox™ is our most popular.</h3>
+                                            <div class="faq-sizing">
+                                                <p class="faq1"><strong>Height:</strong>(back) 27.5", (front) 21.6"</p>
+                                                <p class="faq1"><strong>Width:</strong> 16.1"</p>
+                                                <p class="faq1"><strong>Depth:</strong> 15.7"</p>
+                                                <p class="faq1"><strong>Entry/Opening Area:</strong> Width: 14.5", Depth: 12.9"</p>
+                                            </div>
+                                            <h3 class="faq-header-1">The Large DoorBox™ is the largest for professional needs</h3>
+                                            <div class="faq-sizing">
+                                                <p class="faq1"><strong>Height:</strong>(back) 27.5", (front) 21.6"</p>
+                                                <p class="faq1"><strong>Width:</strong>&nbsp;36.1"</p>
+                                                <p class="faq1"><strong>Depth:</strong> 18.7"</p>
+                                                <p class="faq1"><strong>Entry/Opening Area:</strong> Width: 34.5", Depth: 14.9"</p>
+                                            </div>
+                                        </div>
+                                        <h4 class="accordion-toggle">How do I install the DoorBox?</h4>
+                                        <div class="accordion-content">
+                                            <p>Actually, you have two installation options:</p>
+                                            <p>If you want to install the DoorBox yourself, it is quite simple: Each DoorBox comes 4 mounting holes in the base and 4 in the back of the unit.&nbsp; We recommend that the DoorBox is bolted (using bolts supplied) to a wall or foundation. To see how installation works, review the Operations Manual found in the “How DoorBox Works” section.</p>
+                                            <p>Your other more convenient option, if you live in the GTA, is to have us install it for you. For practically the same cost to ship the DoorBox, one of our friendly installers will make an appointment with you and install it in a place of your choosing. No need to worry about tools, and the DoorBox will be installed and activated in no time.</p>
+                                        </div>
+                                    </div>
+                                    <p class="p1 contact-us">Still haven't found the information you were looking for?&nbsp; Please contact us at <a href="mailto:service@thedoorbox.com"><span class="s2">service@thedoorbox.com</span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

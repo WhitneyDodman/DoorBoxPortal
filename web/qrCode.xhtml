@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/empty.xhtml">
+            <ui:param name="title" value="QRCode and Mobile App Detect"/>
+            <ui:define name="content">
+                <script src='./js/jquery-1.11.2.min.js'></script>
+                <script src='./js/mdetect.js'></script>
+                <script src='./js/doorboxDetect.js'></script>
+                <style type="text/css">
+                  .thedoorbox-detect {
+                    display: none;
+                  }
+                </style>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

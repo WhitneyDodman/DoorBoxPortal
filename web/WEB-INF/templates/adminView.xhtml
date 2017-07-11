@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="global.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <div class="grid--full">
+                        <div class="accountMenu grid-item one-fifth">                            
+                            <ul>
+                                <a href="./myAccountOverview.xhtml"><h3>Admin Menu</h3></a>                                
+                                <hr/>
+                                <li><a href="./admin_serviceStatus.xhtml">Service Status</a></li>
+                                <br/>
+                                <li><a href="./admin_manageAccount.xhtml" style="font-style:italic; color:grey">Manage Accounts</a></li>
+                                <li><a href="./admin_manageSubscription.xhtml" style="font-style:italic; color:grey">Manage Subscription</a></li>
+                                <li><a href="./admin_manageDoorboxes.xhtml">Manage Doorboxes</a></li>
+                                <br/>
+                                <li><a href="./admin_sendEphemeralCode.xhtml" style="font-style:italic; color:grey">Send DoorBox Code</a></li>
+                                <li><a href="./admin_viewEphemeralCodesLog.xhtml" style="font-style:italic; color:grey">View Sent Codes</a></li>
+                                <br/>
+                                <li><a href="./admin_viewActivityLogs.xhtml" style="font-style:italic; color:grey">View Activity Logs</a></li>
+                                <br/>
+                                <li><a href="./admin_initDoorbox.xhtml">Doorbox Initialization</a></li>
+                                <br/>
+                                <li><a href="admin_testPage.xhtml">Misc Test Page</a></li>
+                                <hr/>
+                            </ul>
+                        </div>
+                        <div class="accountPage grid-item four-fifths">
+                            <ui:insert name="adminPage">
+                                Admin Page
+                            </ui:insert>
+                        </div>
+                    </div>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/adminView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="adminPage">
+                <p:panel id="sendCodePanel" class="three-quarters account-view--right" header="Admin View - DoorBox Details" >
+                    <h:form id="viewDoorboxForm"> 
+                        <p:panelGrid columns="1">
+                            <h:graphicImage url="#{adminDoorboxBean.photoUrl}" style="width: 600; background: white; border: 2px solid #1b75bb; margin-top: 10px;"/>
+                        </p:panelGrid>
+                        <p:panelGrid  columns="2" columnClasses="label,value">
+                            <h:outputText value="Unique Id:" />
+                            <h:outputText value="#{adminDoorboxBean.uniqueId}" />
+
+                            <h:outputText value="Location Description" />
+                            <h:outputText value="#{adminDoorboxBean.locationDescription}" />
+
+                            <h:outputText value="Model:" />
+                            <h:outputText value="#{adminDoorboxBean.selectedModelId}" />
+
+                            <h:outputText value="Init Date:" />
+                            <h:outputText value="#{adminDoorboxBean.initDate}">
+                                <f:convertDateTime pattern="yyyyMMddHHmm"/>
+                            </h:outputText>
+
+                            <h:outputText value="Seed" />
+                            <h:outputText value="#{adminDoorboxBean.seed}" />
+
+                            <h:outputText value="Master Code" />
+                            <h:outputText value="#{adminDoorboxBean.masterCode}" />
+
+                            <h:outputText value="Sub-Master Code" />
+                            <h:outputText value="#{adminDoorboxBean.subMasterCode}" />
+                            
+                            <h:outputLabel value="Address 1" style="font-weight:bold" />
+                            <h:outputText id="address1" value="#{adminDoorboxBean.address1}" />
+                                
+                            <h:outputLabel value="Address 2" style="font-weight:bold" />
+                            <h:outputText id="address2" value="#{adminDoorboxBean.address2}" />
+                                
+                            <h:outputLabel value="City" style="font-weight:bold" />
+                            <h:outputText id="city" value="#{adminDoorboxBean.city}" />
+                                
+                            <h:outputLabel value="State/Province" style="font-weight:bold" />
+                            <h:outputText id="stateprov" value="#{adminDoorboxBean.stateprov}" style="width:200px" />
+                                
+                            <h:outputLabel value="Country" style="font-weight:bold" />
+                            <h:outputText id="country" value="#{adminDoorboxBean.country}" style="width:200px" />
+                              
+                            <h:outputLabel value="Postal/Zip Code" style="font-weight:bold" />
+                            <h:outputText id="postalcode" value="#{adminDoorboxBean.postalcode}" />
+                            
+                            <h:outputLabel value="Longitude" style="font-weight:bold" />
+                            <h:outputText id="longitude" value="#{adminDoorboxBean.longitude}" />
+
+                            <h:outputLabel value="Latitude" style="font-weight:bold" />
+                            <h:outputText id="latitude" value="#{adminDoorboxBean.latitude}" />
+                            
+                        </p:panelGrid>
+                        <p:panelGrid columns="1">
+                            <iframe width="600" height="450" frameborder="0" style="border: 2px solid #1b75bb; margin: 10px 0px 10px 0px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAd6J5XSbehfRf_DoFi_Yg9IniG2TzqkUQ&amp;q=#{adminDoorboxBean.address1},#{adminDoorboxBean.address2},#{adminDoorboxBean.city},#{adminDoorboxBean.stateprov},#{adminDoorboxBean.country}&amp;zoom=18" />
+                        </p:panelGrid>
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="Close" action="myDoorboxes" icon="ui-icon-cancel"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:panel>          
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

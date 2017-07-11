@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="mainTabIndex" value="tab0"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_xclick-subscriptions"/>
+                        <!--input type="hidden" name="hosted_button_id" value="94LKAWXBTV4DU"/-->
+                        <INPUT TYPE="hidden" NAME="currency_code" value="CAD"/>
+                        
+                        <input type="hidden" name="business" value="sales@thedoorbox.com"/>
+                        <input type="hidden" name="notify_url" value="https://portal.thedoorbox.com/PayPalIPNHandler"/>
+                        <input type="image" src="./images/subscribe_8p99_250x40.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
+                        <input type="hidden" name="initamt" VALUE="49.99"/>
+                        <input type="hidden" name="init_amt" VALUE="49.99"/>
+                        <input type="hidden" name="a1" VALUE="49.98"/>
+                        <input type="hidden" name="p1" VALUE="1"/>
+                        <input type="hidden" name="t1" VALUE="M"/>
+                        <input type="hidden" name="a3" VALUE="8.99"/>
+                        <input type="hidden" name="p3" VALUE="1"/>
+                        <input type="hidden" name="t3" VALUE="M"/>
+                        <input type="hidden" name="src" VALUE="1"/>
+                        <input type="hidden" name="billingperiod" VALUE="month"/>
+                        <input type="hidden" name="billingfrequency" VALUE="1"/>
+                        <input type="hidden" name="totalbillingcycles" VALUE="0"/>
+                        <input type="hidden" name="first_name" VALUE="Test"/>
+                        <input type="hidden" name="last_name" VALUE="User"/>
+                        <input type="hidden" name="address1" VALUE="addr1"/>
+                        <input type="hidden" name="address2" VALUE=""/>
+                        <input type="hidden" name="city" VALUE="Toronto"/>
+                        <input type="hidden" name="state" VALUE="ON"/>
+                        <input type="hidden" name="zip" VALUE="#{newSubscriberBean.postalcode}"/>
+                        <input type="hidden" name="country" VALUE="CA"/>
+                        <input type="hidden" name="lc" VALUE="#{newSubscriberBean.country}"/>
+                        <input type="hidden" name="email" VALUE="testuser@mailinator.com"/>
+                        <!--input type="hidden" name="night_phone_a" VALUE="# {newSubscriberBean.phone1}"/>
+                        <input type="hidden" name="night_phone_b" VALUE="# {newSubscriberBean.phone2}"/-->
+                        <input type="hidden" name="night_phone_a" VALUE="1"/>
+                        <input type="hidden" name="night_phone_b" VALUE="#{newSubscriberBean.phone1}"/>
+                        <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+                    </form>
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

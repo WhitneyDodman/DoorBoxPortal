@@ -1,0 +1,132 @@
+CREATE TABLE `account` (
+  `ACCOUNT_ID` int(11) NOT NULL,
+  `ACCOUNT_STATE` int(11) NOT NULL,
+  `DATE_CREATED` datetime NOT NULL,
+  `DATE_UPDATED` datetime NOT NULL,
+  `EMAIL` varchar(64) NOT NULL,
+  `PASSWORD` varchar(32) NOT NULL,
+  `REMEMBER_ME` int(1) DEFAULT NULL,
+  `SESSION_DURATION` int(11) DEFAULT NULL,
+  `FIRST_NAME` varchar(32) NOT NULL,
+  `MIDDLE_NAME` varchar(32) DEFAULT NULL,
+  `LAST_NAME` varchar(32) NOT NULL,
+  `COMPANY` varchar(32) DEFAULT NULL,
+  `ADDRESS_1` varchar(64) NOT NULL,
+  `ADDRESS_2` varchar(64) DEFAULT NULL,
+  `CITY` varchar(32) NOT NULL,
+  `STATEPROV` varchar(2) NOT NULL,
+  `COUNTRY` varchar(2) NOT NULL,
+  `POSTALCODE` varchar(16) NOT NULL,
+  `PHONE_1` varchar(32) NOT NULL,
+  `PHONE_2` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`ACCOUNT_ID`),
+  UNIQUE KEY `EMAIL` (`EMAIL`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `doorbox` (
+  `DOORBOX_ID` int(11) NOT NULL,
+  `ACCOUNT_ID` int(11) NOT NULL,
+  `UNIQUE_ID` varchar(32) NOT NULL,
+  `LATITUDE` varchar(20) DEFAULT NULL,
+  `LONGITUDE` varchar(20) DEFAULT NULL,
+  `MODEL_ID` int(11) NOT NULL,
+  `DATE_CREATED` datetime NOT NULL,
+  `DATE_UPDATED` datetime NOT NULL,
+  `INIT_DATE` datetime NOT NULL,
+  `MASTER_CODE` varchar(20) NOT NULL COMMENT 'Negate to disable',
+  `SUB_MASTER_CODE` varchar(20) NOT NULL COMMENT 'Negate to disable',
+  `TECHNICIAN_CODE` varchar(20) DEFAULT NULL COMMENT 'Negate to disable',
+  `LOCATION_DESCRIPTION` varchar(128) DEFAULT NULL,
+  `ADDRESS_1` varchar(64) DEFAULT NULL,
+  `ADDRESS_2` varchar(64) DEFAULT NULL,
+  `CITY` varchar(32) DEFAULT NULL,
+  `STATE_PROV` varchar(2) DEFAULT NULL,
+  `COUNTRY` varchar(2) DEFAULT NULL,
+  `POSTAL_CODE` varchar(16) DEFAULT NULL,
+  `PHOTO_URL` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`DOORBOX_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `log` (
+  `LOG_ID` int(11) NOT NULL,
+  `TIMESTAMP` datetime DEFAULT NULL,
+  `ACCOUNT_ID` int(11) DEFAULT NULL,
+  `EVENT` varchar(64) DEFAULT NULL,
+  `DESCRIPTION` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`LOG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `doorbox_model` (
+  `model_id` int(11) NOT NULL,
+  `model_number` varchar(20) NOT NULL,
+  `custom` binary(1) DEFAULT NULL,
+  `networked` binary(1) DEFAULT NULL,
+  `insulated` binary(1) DEFAULT NULL,
+  `dimensions` varchar(128) DEFAULT NULL,
+  `features` varchar(128) DEFAULT NULL,
+  `photo_url` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`model_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `ephemeral_code` (
+  `EPHEMERAL_CODE_ID` int(11) NOT NULL,
+  `EPHEMERAL_CODE_TYPE` int(11) NOT NULL,
+  `DOORBOX_ID` int(11) NOT NULL,
+  `EPHEMERAL_CODE` varchar(20) NOT NULL,
+  `DESCRIPTION` varchar(20) DEFAULT NULL,
+  `START_DATE` datetime DEFAULT NULL,
+  `END_DATE` datetime DEFAULT NULL,
+  `RECIPIENT_NAME` varchar(32) DEFAULT NULL,
+  `RECIPIENT_EMAIL` varchar(64) DEFAULT NULL,
+  `RECIPIENT_PHONE` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`EPHEMERAL_CODE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `sequence` (
+  `seq_name` varchar(50) NOT NULL,
+  `seq_value` decimal(38,0) DEFAULT NULL,
+  PRIMARY KEY (`seq_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `session_key` (
+  `session_id` varchar(40) NOT NULL,
+  `account_id` bigint(20) NOT NULL,
+  `ip_address` varchar(255) NOT NULL,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `subscription` (
+  `SUBSCRIPTION_ID` int(11) NOT NULL,
+  `SUBSCRIPTION_TYPE` int(11) NOT NULL,
+  `SUBSCRIPTION_STATE` int(11) NOT NULL,
+  `ACCOUNT_ID` int(11) NOT NULL,
+  `START_DATE` date NOT NULL,
+  `END_DATE` date NOT NULL,
+  `PAYMENT_PERIOD` int(11) NOT NULL,
+  `PAYMENT_TYPE` int(11) NOT NULL,
+  PRIMARY KEY (`SUBSCRIPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `user` (
+  `USER_ID` int(11) NOT NULL DEFAULT '0',
+  `ACCOUNT_ID` int(11) NOT NULL,
+  `USER_ROLE` int(11) NOT NULL,
+  `FIRST_NAME` varchar(20) NOT NULL,
+  `MIDDLE_NAME` varchar(20) DEFAULT NULL,
+  `LAST_NAME` varchar(20) NOT NULL,
+  `COMPANY NAME` varchar(20) DEFAULT NULL,
+  `ADDRESS_1` varchar(20) NOT NULL,
+  `ADDRESS_2` varchar(20) DEFAULT NULL,
+  `CITY` varchar(20) NOT NULL,
+  `STATE_PROV` varchar(20) NOT NULL,
+  `COUNTRY` varchar(2) NOT NULL,
+  `POSTAL_CODE` varchar(20) DEFAULT NULL,
+  `PHONE_LANDLINE` varchar(20) DEFAULT NULL,
+  `PHONE_MOBILE` varchar(20) DEFAULT NULL,
+  `EMAIL` varchar(20) NOT NULL,
+  `USERNAME` varchar(20) NOT NULL,
+  PRIMARY KEY (`USER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="DoorBox - Home Page - Welcome!"/>
+            <ui:param name="metaDescription" value="DoorBox, the service that solves your package shipping problems"/>
+            <ui:param name="metaKeywords" value="doorbox, package, shipping, online purchases, courier"/>
+            <ui:define name="stylesheets">
+                <link rel="stylesheet" href="./css/timber.css" />
+                <link rel="stylesheet" href="./css/button.css" />
+            </ui:define>
+            <ui:define name="scripts">
+                <script src="./js/jquery-1.11.2.min.js" type="text/javascript"></script>
+                <script src="./js/timber.js" type="text/javascript"></script>
+            </ui:define>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <h1 class="index-message" align="center">What is the DoorBox?</h1>
+                    
+                    <p style="font-size: 18px;">The DoorBox is a high-quality container that solves your package delivery issues. Couriers place parcels securely in the DoorBox and get
+                        proof of delivery, and your parcels are protected from sun, rain, snow, and theft. No more missed deliveries, no more rescheduling your day around expected deliveries, and no more
+                        anxiety due to package theft.</p>
+                    <ul style="list-style-type: square; list-style-position: inside; margin-left: 20px;">
+                        <li style="font-size: 18px;">No need to be home to sign for packages</li>
+                        <li style="font-size: 18px;">Avoid delays receiving your deliveries</li>
+                        <li style="font-size: 18px;">Stop your packages from being damaged or stolen</li>                    
+                    </ul>
+                    
+                    <p style="font-size: 18px;">The DoorBox service has no up-front investment which means you can get one <em>today</em>, for only $8.99 per month. Make delivery problems a thing of the past. Get the DoorBox!</p>
+                    
+                    <!-- p style="font-size: 18px;">The DoorBox is high-quality mail container that solves the problem of waiting for or missing an important delivery, and protects your packages from sun, rain, snow, and theft. No longer must you take the day off work, wait an extra day, or travel to the local shipping depot. Damaged or stolen packages are a thing of the past!</p-->
+
+                    <!--p style="font-size: 18px;">No longer must you take the day off work, wait an extra day, or travel to
+                        the local shipping depot. Damaged or stolen packages are a thing of the past! The DoorBox is high-quality mail container that solves the problem of waiting for or missing an important delivery,
+                        and protects your packages from sun, rain, snow, and theft. </p-->
+
+                    <br/>
+
+                    <div class="box-callouts" style="margin: 15px 0px 45px 0px;">
+                        <p>
+                            <img class="checkbox" src="./images/checkbox.png"/>Never Miss a Parcel Again
+                            <img class="checkbox" src="./images/checkbox.png"/>Stop Porch Pirates
+                            <img class="checkbox" src="./images/checkbox.png"/>Return Items Ordered Online
+                        </p>
+                    </div>
+
+
+                    <img class="doorbox-feature-img" src="./images/WhatsTheBigIdea_1025x410.png" alt=""/>
+
+                    <br/>
+                    <br/>
+                    
+                    <p style="font-size: 18px; margin-top: 25px; margin-bottom: 35px;">As a subscriber, our evolving service will bring you new features such as remote
+                        unlocking from our mobile app, and notifications so you know immediately when a package is sent or received, what code is used, detailed logs,
+                        and even alerts warning you of unauthorized attempts to access your DoorBox. All these features and more coming soon.</p>
+                    
+                    <!--p style="font-size: 18px; margin-top: 25px; margin-bottom: 35px;"><em>No up-front investment required.</em> Our DoorBox service makes this high-quality product affordable through a low monthly subscription, plus our evolving service will bring about new features such as remote unlocking from our mobile app, and telemetry so you know immediately when a package is delivered or picked up, what code is used, and failed code attempts. All these features and more coming soon.</p-->
+                    
+                    <h1 class="index-message" align="center">Great! How Do I Get One?</h1>
+                                        
+                    <p style="font-size: 18px;">On the <a href="./shop.xhtml">Shop page</a>, select a model - large, medium, or small - depending on your
+                        parcel delivery needs. From there, you can subscribe using a major credit card using the world's most trusted credit card processor, <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" />.</p>
+                    
+                    <p style="font-size: 18px;">For a limited time, we're promoting our service for <u>$8.99/month plus delivery and installation to anywhere in the GTA for only $39.99</u>.
+                        Our friendly DoorBox installer will bring the DoorBox right to your home or business and take care of installation for you.</p>
+                        
+                    <div class="shop-container" style="margin-top: 45px; margin-bottom: 45px;">
+                        <a href="./shop.xhtml" class="shop-button">Shop Now!</a>
+                    </div>
+                    
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

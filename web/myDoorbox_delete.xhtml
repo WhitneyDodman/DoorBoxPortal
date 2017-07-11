@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./WEB-INF/templates/accountView.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="accountPage">
+                <p:panel id="panel" class="three-quarters account-view--right" header="Send Ephemeral Code" >
+                    <p:messages id="messages" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+                    <h:form id="form">  
+                        <p:panelGrid  columns="2" columnClasses="label,value">
+                            <h:outputText value="DoorboxId"/>
+                            <h:outputText value="#{myDoorboxBean.doorboxId}"/>
+                            <h:outputText value="UniqueId"/>
+                            <h:outputText value="#{myDoorboxBean.uniqueId}"/>
+                            <h:outputText value="Location Description"/>
+                            <h:outputText value="#{myDoorboxBean.locationDescription}"/>
+                        </p:panelGrid>
+                        <p:panelGrid columns="1">
+                            <p>Are you absolutely sure you want to permanently delete this DoorBox?</p>
+                        </p:panelGrid>
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="Delete" action="#{myDoorboxBean.delete}" validateClient="true" ajax="false" icon="ui-icon-check">
+                                <f:param name="doorboxId" value="#{myDoorboxBean.doorboxId}" />
+                            </p:commandButton>
+                            <p:commandButton value="Cancel" action="myDoorboxes" immediate="true" icon="ui-icon-check"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:panel>          
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

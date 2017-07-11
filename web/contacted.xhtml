@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <body>
+        <ui:composition template="./WEB-INF/templates/global.xhtml">
+            <ui:param name="title" value="Welcome!"/>
+            <ui:param name="metaDescription" value="Log in as an existing user or register for a new account"/>
+            <ui:param name="metaKeywords" value="doorbox user and asset management portal"/>
+            <ui:define name="scripts">
+                <script src="https://www.google.com/recaptcha/api.js"></script>
+            </ui:define>
+            <ui:define name="content">
+                <main class="wrapper main-content" role="main">
+                    <div align="center">
+                        <h1>Message Received!</h1>
+                    </div>
+                    <p style="font-size:18px;" align="center">We endeavor to respond to all inquiries within one business day. Sooner if possible.</p>
+                    <p style="font-size:18px;" align="center">If your matter is urgent, please do not hesitate to contact us directly at</p>
+                    <p style="font-size:24px;" align="center">(647) 946-5410</p>
+                    <p style="font-size:18px;" align="center">Monday to Friday between 9am - 5pm</p>
+                    
+                </main>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
